@@ -1,9 +1,0 @@
-Package: luci-theme-freifunk-generic
-Version: svn-r9931-1
-Depends: libc, luci-theme-base
-Source: feeds/luci/contrib/package/luci
-Section: luci
-Maintainer: Manuel Munz <freifunk-at-somakoma-dot-de>
-Architecture: ar71xx
-Installed-Size: 12967
-Description:  Freifunk Generic Theme

@@ -1,9 +1,0 @@
-Package: luci-sgi-uhttpd
-Version: svn-r9931-1
-Depends: libc, uhttpd, uhttpd-mod-lua
-Source: feeds/luci/contrib/package/luci
-Section: luci
-Maintainer: LuCI Development Team <luci@lists.subsignal.org>
-Architecture: ar71xx
-Installed-Size: 1490
-Description:  Binding for the uHTTPd server

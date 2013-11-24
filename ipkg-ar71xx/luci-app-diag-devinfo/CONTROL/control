@@ -1,9 +1,0 @@
-Package: luci-app-diag-devinfo
-Version: svn-r9931-1
-Depends: libc, luci-app-diag-core, smap, netdiscover, mac-to-devinfo, httping, smap-to-devinfo, netdiscover-to-devinfo
-Source: feeds/luci/contrib/package/luci
-Section: luci
-Maintainer: LuCI Development Team <luci@lists.subsignal.org>
-Architecture: ar71xx
-Installed-Size: 22074
-Description:  LuCI Diagnostics Tools (Device Info)

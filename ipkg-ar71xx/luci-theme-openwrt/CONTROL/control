@@ -1,9 +1,0 @@
-Package: luci-theme-openwrt
-Version: svn-r9931-1
-Depends: libc, luci-theme-base
-Source: feeds/luci/contrib/package/luci
-Section: luci
-Maintainer: LuCI Development Team <luci@lists.subsignal.org>
-Architecture: ar71xx
-Installed-Size: 7051
-Description:  OpenWrt.org

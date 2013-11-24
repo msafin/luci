@@ -1,9 +1,0 @@
-Package: luci-proto-3g
-Version: svn-r9931-1
-Depends: libc, comgt
-Source: feeds/luci/contrib/package/luci
-Section: luci
-Maintainer: LuCI Development Team <luci@lists.subsignal.org>
-Architecture: ar71xx
-Installed-Size: 1846
-Description:  Support for 3G
