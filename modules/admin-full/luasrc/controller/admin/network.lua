@@ -32,7 +32,7 @@ function index()
 				has_switch = true
 				return false
 			end)
-
+--[[
 		if has_switch then
 			page  = node("admin", "network", "vlan")
 			page.target = cbi("admin_network/vlan")
@@ -43,7 +43,7 @@ function index()
 			page.leaf = true
 		end
 
-
+]]--
 		local has_wifi = false
 
 		uci:foreach("wireless", "wifi-device",
@@ -110,18 +110,17 @@ function index()
 		page = entry({"admin", "network", "network"}, arcombine(cbi("admin_network/network"), cbi("admin_network/ifaces")), _("Interfaces"), 10)
 		page.leaf   = true
 		page.subindex = true
-
+--[[
 		if page.inreq then
 			uci:foreach("network", "interface",
 				function (section)
 					local ifc = section[".name"]
-					if ifc ~= "loopback" then
+					if ifc == "lan" then
 						entry({"admin", "network", "network", ifc},
 						true, ifc:upper())
 					end
 				end)
 		end
-
 
 		if nixio.fs.access("/etc/config/dhcp") then
 			page = node("admin", "network", "dhcp")
@@ -154,7 +153,7 @@ function index()
 		page.target = template("admin_network/diagnostics")
 		page.title  = _("Diagnostics")
 		page.order  = 60
-
+]]--
 		page = entry({"admin", "network", "diag_ping"}, call("diag_ping"), nil)
 		page.leaf = true
 
