@@ -1,0 +1,6 @@
+config setting
+	option deviceID 'scanner1'
+	option server 'www.sharegogo.com'
+	option updateInterval '5000'
+	option sendInterval '5000'
+	option scanRange '3'
