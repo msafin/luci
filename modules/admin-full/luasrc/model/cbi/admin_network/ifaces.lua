@@ -23,6 +23,7 @@ arg[1] = arg[1] or ""
 
 local has_dnsmasq  = fs.access("/etc/config/dhcp")
 local has_firewall = fs.access("/etc/config/firewall")
+has_firewall = false
 
 m = Map("network", translate("Interfaces") .. " - " .. arg[1]:upper(), translate("On this page you can configure the network interfaces. You can bridge several interfaces by ticking the \"bridge interfaces\" field and enter the names of several network interfaces separated by spaces. You can also use <abbr title=\"Virtual Local Area Network\">VLAN</abbr> notation <samp>INTERFACE.VLANNR</samp> (<abbr title=\"for example\">e.g.</abbr>: <samp>eth0.1</samp>)."))
 m:chain("wireless")
@@ -164,7 +165,7 @@ s.addremove = false
 
 s:tab("general",  translate("General Setup"))
 s:tab("advanced", translate("Advanced Settings"))
-s:tab("physical", translate("Physical Settings"))
+--s:tab("physical", translate("Physical Settings"))
 
 if has_firewall then
 	s:tab("firewall", translate("Firewall Settings"))
@@ -227,7 +228,7 @@ end
 auto = s:taboption("advanced", Flag, "auto", translate("Bring up on boot"))
 auto.default = (net:proto() == "none") and auto.disabled or auto.enabled
 
-
+--[[
 if not net:is_virtual() then
 	br = s:taboption("physical", Flag, "type", translate("Bridge interfaces"), translate("creates a bridge over specified interface(s)"))
 	br.enabled = "bridge"
@@ -340,7 +341,7 @@ if has_firewall then
 		end
 	end
 end
-
+]]--
 
 function p.write() end
 function p.remove() end
@@ -404,7 +405,7 @@ if has_dnsmasq and net:proto() == "static" then
 			return false
 		end
 	end)
-
+--[[
 	if not has_section then
 
 		s = m2:section(TypedSection, "dhcp", translate("DHCP Server"))
@@ -482,6 +483,7 @@ if has_dnsmasq and net:proto() == "static" then
 		end
 
 	end
+	]]--
 end
 
 
