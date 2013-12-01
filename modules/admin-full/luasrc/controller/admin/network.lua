@@ -65,6 +65,9 @@ function index()
 			page = entry({"admin", "network", "wireless_status"}, call("wifi_status"), nil)
 			page.leaf = true
 
+			page = entry({"admin", "network", "scan_mac_list"}, call("scan_mac_list"), nil)
+			page.leaf = true
+
 			page = entry({"admin", "network", "wireless_reconnect"}, call("wifi_reconnect"), nil)
 			page.leaf = true
 
@@ -385,6 +388,12 @@ function wifi_status(devs)
 	end
 
 	luci.http.status(404, "No such device")
+end
+
+function scan_mac_list()
+        local rv = {ip = "192.168.1.1"}
+        luci.http.prepare_content("application/json")
+        luci.http.write_json(rv)
 end
 
 local function wifi_reconnect_shutdown(shutdown, wnet)

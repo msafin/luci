@@ -1,12 +1,51 @@
+<%-
+local sys = require "luci.sys"
+local fs = require "luci.fs"
+local utl = require "luci.util"
+local uci = require "luci.model.uci".cursor()
+local ntm = require "luci.model.network"
+
+local has_iwinfo = pcall(require,"iwinfo")
+
+ntm.init(uci)
+
+local devices = ntm.get_wifidevs()
+local arpcache = {}
+sys.net.arptable(function(e) arpcache[e["HW address"]:upper()] = e["IP address"]end)
+
+local netlist = {}
+local netdevs = {}
+
+local dev
+for _,dev in ipairs(devices) do
+        local net
+        for _,net in ipairs(dev:get_wifinets()) do
+                netlist[#netlist + 1] = net:id()
+                netdevs[net:id()] = dev:name()
+        end
+end
+-%>
 <script type="text/javascript" src="<%=resource%>/xhr.js"></script>
 <script type="text/javascript">
+
+var wifidevs = <%=luci.http.write_json(netdevs)%>
+var arptable = <%=luci.http.write_json(arpcache)%>
+
 window.setInterval(function(){
-XHR.get('<%=luci.dispatcher.build_url("admin","network","adcpd","status")%>',nul
+
+XHR.get('<%=luci.dispatcher.build_url("admin","network","scan_mac_list")%>',null,
 function(x,st){
         var i = 0;
         var j =1;
 })
 },2000);
+
+XHR.poll(5,'<%=luci.dispatcher.build_url("admin","network","wireless_status",table.concat(netlist,","))%>',null,
+function(x,st)
+{
+        if(st){
+        }
+});
 
 </script>
 
