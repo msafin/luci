@@ -3713,3 +3713,21 @@ msgstr "« 后退"
 
 #~ msgid "Statistics"
 #~ msgstr "统计信息"
+
+msgid "Device ID"
+msgstr "设备ID"
+
+msgid "Server Url"
+msgstr "服务器地址"
+
+msgid "Update Interval"
+msgstr "更新周期"
+
+msgid "Send Interval"
+msgstr "发送周期"
+
+msgid "Send Interval"
+msgstr "扫描周期"
+
+msgid "Scan Range"
+msgstr "扫描范围"

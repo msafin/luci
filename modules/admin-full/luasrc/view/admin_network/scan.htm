@@ -1,3 +1,15 @@
+<script type="text/javascript" src="<%=resource%>/xhr.js"></script>
+<script type="text/javascript">
+window.setInterval(function(){
+XHR.get('<%=luci.dispatcher.build_url("admin","network","adcpd","status")%>',nul
+function(x,st){
+        var i = 0;
+        var j =1;
+})
+},2000);
+
+</script>
+
 <fieldset class="cbi-section">
 	<legend><%:Nearby MAC%></legend>
 	<table class="cbi-section-table" id="mac_table">

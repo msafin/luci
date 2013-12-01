@@ -10,5 +10,3 @@ s:option(Value,"scanRange",translate("Scan Range"))
 m:section(SimpleSection).template = "admin_network/scan"
 
 return m
-
-
