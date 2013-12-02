@@ -26,19 +26,36 @@ for _,dev in ipairs(devices) do
 end
 -%>
 <script type="text/javascript" src="<%=resource%>/xhr.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"><![CDATA[
 
 var wifidevs = <%=luci.http.write_json(netdevs)%>
 var arptable = <%=luci.http.write_json(arpcache)%>
 
 window.setInterval(function(){
-
 XHR.get('<%=luci.dispatcher.build_url("admin","network","scan_mac_list")%>',null,
 function(x,st){
-        var i = 0;
-        var j =1;
+        if(st){
+                var mactable = document.getElementById("mac_table");
+
+                if(mactable){
+                        while(mactable.rows.length > 1)
+                                mactable.rows[1].parentNode.removeChild(mactable.rows[1]);
+
+                        for(var i = 0 ; i < st.length; i++){
+                                var item = st[i];
+
+                                var tr =  mactable.insertRow(-1);
+                                tr.className = 'cbi-section-table-row';
+
+                                tr.insertCell(-1).innerHTML = item.mac;
+                                tr.insertCell(-1).innerHTML = item.signal;
+                                tr.insertCell(-1).innerHTML = item.startTime;
+                                tr.insertCell(-1).innerHTML = item.endTime;
+                        }
+                }
+        }
 })
-},2000);
+},300);
 
 XHR.poll(5,'<%=luci.dispatcher.build_url("admin","network","wireless_status",table.concat(netlist,","))%>',null,
 function(x,st)
@@ -47,7 +64,7 @@ function(x,st)
         }
 });
 
-</script>
+]]></script>
 
 <fieldset class="cbi-section">
 	<legend><%:Nearby MAC%></legend>

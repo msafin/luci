@@ -391,10 +391,29 @@ function wifi_status(devs)
 end
 
 function scan_mac_list()
-        local rv = {ip = "192.168.1.1"}
+        local list = {}
+
+        local io = require "io"
+
+        for line in io.lines("/tmp/maclist") do
+
+                line = luci.util.trim(line)
+                local values = luci.util.split(line,"%s+",nil,true)
+                local item = {
+                        mac = values[1],
+                        signal = values[2],
+                        startTime = values[3],
+                        endTime = values[4]
+                }
+
+                list[#list + 1] = item
+        end
+
         luci.http.prepare_content("application/json")
-        luci.http.write_json(rv)
+        luci.http.write_json(list)
+
 end
+
 
 local function wifi_reconnect_shutdown(shutdown, wnet)
 	local netmd = require "luci.model.network".init()
