@@ -1,5 +1,5 @@
 m = Map("scan",translate(""),translate(""))
-s = m:section(TypedSection,"setting",translate("Scan Configuration"))
+s = m:section(TypedSection,"setting",translate("Scan Setting"))
 s.anonymous=true
 s:option(Value,"deviceID",translate("Device ID"))
 s:option(Value,"server",translate("Server Url"))

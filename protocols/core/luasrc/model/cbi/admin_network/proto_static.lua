@@ -34,8 +34,8 @@ gateway = section:taboption("general", Value, "gateway", translate("IPv4 gateway
 gateway.datatype = "ip4addr"
 
 
-broadcast = section:taboption("general", Value, "broadcast", translate("IPv4 broadcast"))
-broadcast.datatype = "ip4addr"
+--broadcast = section:taboption("general", Value, "broadcast", translate("IPv4 broadcast"))
+--broadcast.datatype = "ip4addr"
 
 
 dns = section:taboption("general", DynamicList, "dns",
@@ -44,7 +44,7 @@ dns = section:taboption("general", DynamicList, "dns",
 dns.datatype = "ipaddr"
 dns.cast     = "string"
 
-
+--[[
 if luci.model.network:has_ipv6() then
 
 	local ip6assign = section:taboption("general", Value, "ip6assign", translate("IPv6 assignment length"),
@@ -73,7 +73,7 @@ if luci.model.network:has_ipv6() then
 	ip6prefix:depends("ip6assign", "")
 
 end
-
+]]--
 
 luci.tools.proto.opt_macaddr(section, ifc, translate("Override MAC address"))
 

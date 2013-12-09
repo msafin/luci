@@ -3714,6 +3714,12 @@ msgstr "« 后退"
 #~ msgid "Statistics"
 #~ msgstr "统计信息"
 
+msgid "Scan Setting"
+msgstr "扫描设置" 
+
+msgid "Mac List"
+msgstr "MAC列表" 
+
 msgid "Device ID"
 msgstr "设备ID"
 

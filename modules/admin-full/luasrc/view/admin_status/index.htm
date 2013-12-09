@@ -102,7 +102,63 @@ You may obtain a copy of the License at
 <%+header%>
 
 <script type="text/javascript" src="<%=resource%>/cbi.js"></script>
+<script type="text/javascript">//<![CDATA[
+	function progressbar(v, m)
+	{
+		var vn = parseInt(v) || 0;
+		var mn = parseInt(m) || 100;
+		var pc = Math.floor((100 / mn) * vn);
 
+		return String.format(
+			'<div style="width:200px; position:relative; border:1px solid #999999">' +
+				'<div style="background-color:#CCCCCC; width:%d%%; height:15px">' +
+					'<div style="position:absolute; left:0; top:0; text-align:center; width:100%%; color:#000000">' +
+						'<small>%s / %s (%d%%)</small>' +
+					'</div>' +
+				'</div>' +
+			'</div>', pc, v, m, pc
+		);
+	}
+
+
+	XHR.poll(5, '<%=REQUEST_URI%>', { status: 1 },
+		function(x, info)
+		{
+			var e;
+
+			if (e = document.getElementById('localtime'))
+				e.innerHTML = info.localtime;
+
+			if (e = document.getElementById('uptime'))
+				e.innerHTML = String.format('%t', info.uptime);
+
+			if (e = document.getElementById('loadavg'))
+				e.innerHTML = String.format('%.02f, %.02f, %.02f',
+					info.loadavg[0], info.loadavg[1], info.loadavg[2]);
+
+			if (e = document.getElementById('memtotal'))
+				e.innerHTML = progressbar(
+					(info.memfree + info.membuffers + info.memcached) + " <%:kB%>",
+					info.memtotal + " <%:kB%>"
+				);
+
+			if (e = document.getElementById('memfree'))
+				e.innerHTML = progressbar(
+					info.memfree + " <%:kB%>", info.memtotal + " <%:kB%>"
+				);
+
+			if (e = document.getElementById('memcache'))
+				e.innerHTML = progressbar(
+					info.memcached + " <%:kB%>", info.memtotal + " <%:kB%>"
+				);
+
+			if (e = document.getElementById('membuff'))
+				e.innerHTML = progressbar(
+					info.membuffers + " <%:kB%>", info.memtotal + " <%:kB%>"
+				);
+
+		});
+//]]></script>
 <h2><a id="content" name="content"><%:Status%></a></h2>
 
 <fieldset class="cbi-section">
