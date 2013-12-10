@@ -1552,7 +1552,7 @@ end
 -- setup base protocols
 _M:register_protocol("static")
 _M:register_protocol("dhcp")
-_M:register_protocol("none")
+--_M:register_protocol("none")
 
 -- load protocol extensions
 local exts = nfs.dir(utl.libpath() .. "/model/network")
