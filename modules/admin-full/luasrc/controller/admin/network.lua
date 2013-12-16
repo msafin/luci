@@ -395,7 +395,7 @@ function scan_mac_list()
 
         local io = require "io"
 
-        for line in io.lines("/tmp/maclist") do
+        for line in io.lines("/tmp/currentterminal.txt") do
 
                 line = luci.util.trim(line)
                 local values = luci.util.split(line,"%s+",nil,true)

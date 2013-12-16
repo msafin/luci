@@ -49,8 +49,10 @@ function(x,st){
 
                                 tr.insertCell(-1).innerHTML = item.mac;
                                 tr.insertCell(-1).innerHTML = item.signal;
-                                tr.insertCell(-1).innerHTML = item.startTime;
-                                tr.insertCell(-1).innerHTML = item.endTime;
+                                var date = new Date(parseInt(item.startTime) * 1000);
+                                tr.insertCell(-1).innerHTML = date.toLocaleString();
+                                date = new Date(parseInt(item.endTime) * 1000);
+                                tr.insertCell(-1).innerHTML = date.toLocaleString();
                         }
                 }
         }
